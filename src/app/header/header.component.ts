@@ -10,6 +10,14 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+   // this.excluirLocalStorageAoFecharPag();
+  }
+
+  excluirLocalStorageAoFecharPag(){
+    window.onbeforeunload = function() {
+      localStorage.removeItem("user");
+      return '';
+    };
   }
 
 }

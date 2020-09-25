@@ -6,4 +6,6 @@ export class Post {
     public titulo: string;
     public texto: string;
     public usuarioId: Usuario;
+    public listaLinks: String[];
+    public listaImagens: String[];
 }

@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Post } from '../../model/post.model';
 import { PostService } from '../../service/post.service';
 import { FormGroup } from '@angular/forms';
-import { Links } from 'src/app/model/links.model';
 
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Imagem } from 'src/app/model/imagem.model';
@@ -19,19 +18,21 @@ export class PostComponent implements OnInit {
   imagem: Imagem;
   post: Post;
   respostaPost: Post;
-  links: Links;
-  listaLinks: Links[];
+  listaLinks: String[] = [];
+  link: string = "";
+  listaImagensStr: String[] = [];
+  listaImagens: Imagem[];
   controlarLinks: String;
   fileimg: File;
   progress: { percentage: number } = { percentage: 0 };
   previewUrl: any = null;
-  usuario: Usuario
+  usuario: Usuario;
+  
 
   constructor(private service: PostService) { }
 
   ngOnInit(): void {
     this.post = new Post();
-    this.links = new Links();
     this.controlarLinks = "Cadastrar";
     this.usuario = new Usuario();
   }
@@ -39,10 +40,11 @@ export class PostComponent implements OnInit {
 
   salvarPost(formPost: FormGroup): void {
    this.usuario = JSON.parse(localStorage.getItem("user"));
-   console.log(this.usuario);
-    this.post.usuarioId = this.usuario;
-    console.log(this.post)
-    this.service.salvarPost(this.post)
+   this.post.usuarioId = this.usuario;
+   this.post.listaLinks = this.listaLinks;
+   console.log(this.listaImagensStr);
+   this.post.listaImagens = this.listaImagensStr;
+   this.service.salvarPost(this.post)
     .subscribe(resposta => {
       console.log(resposta);  
     }, error => {
@@ -65,7 +67,7 @@ export class PostComponent implements OnInit {
         }else if(event instanceof HttpResponse){
           console.log(event.body);
           this.imagem.imagemUrl = JSON.stringify(event.body);
-          console.log(this.imagem.imagemUrl);
+          this.listaImagensStr.push(this.imagem.imagemUrl);
           $(function () {
             $('#modalImagem').modal('hide');
           });
@@ -88,6 +90,13 @@ export class PostComponent implements OnInit {
     reader.onload = (_event) => { 
       this.previewUrl = reader.result; 
     }
+  }
+  
+  salvarLink(): void {
+    let links: string = this.link;
+    this.listaLinks.push(links);
+    this.link = "";
+    this.alternarValor();
   }
 
 }

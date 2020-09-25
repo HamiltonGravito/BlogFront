@@ -13,7 +13,8 @@ export class PostService {
     salvarPostUrl: string = 'http://localhost:8080/post';
     salvarImagemUrl: string = 'http://localhost:8080/imagem';
     buscarUsuarioId: string = 'http://localhost:8080/usuario';
-
+    deletarPostUrl: string = 'http://localhost:8080/post';
+    
     constructor(private http: HttpClient){ }
 
     salvarPost(post: Post){
@@ -30,6 +31,10 @@ export class PostService {
         return this.http.request(newRequest);
     }
 
+    getPosts(): Observable<Post[]> {
+        return this.http.get<Post[]>(`${this.salvarPostUrl}`);
+    }
+
     /*public buscarUsuarioPorId(id: number) : Promise<Usuario>{
         return this.http.get(`${ this.buscarUsuarioId }/?id=${id}`)
         .toPromise()
@@ -37,4 +42,8 @@ export class PostService {
            return resposta.json()[0];
         });
     }*/
+
+    deletePorId(id: number): Observable<any> {
+        return this.http.delete<any>(`${this.deletarPostUrl}/${id}`);
+    }
 }

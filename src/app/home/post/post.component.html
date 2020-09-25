@@ -23,9 +23,9 @@
             <label for="endereco" class="col-sm-12 col-form-label">Links</label>
             <div class="col-sm-12">
                 <div class="input-group">
-                    <input class="form-control" type="text" name="link" placeholder="Cadastrar Link" aria-describedby="icone" [(ngModel)]="links.link">
+                    <input class="form-control" type="search" name="link" [(ngModel)]="link" #linkF placeholder="Cadastrar Link" aria-describedby="icone">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Salvar</button>
+                        <button class="btn btn-outline-secondary" type="button" (click)="salvarLink()">Salvar</button>
                     </div>
                 </div>
             </div>
