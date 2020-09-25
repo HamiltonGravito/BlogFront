@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <h1 class="mt-5">Posts</h1>
+    <p class="subtitle">
+        <p *ngIf="usuarioLogado == false">Logue-se para Cadastrar Posts<p>
+        <button *ngIf="usuarioLogado"  [routerLink]="['/post']" routerLinkActive="router-link-active" class="btn btn-primary">Cadastrar Post</button></p>
+    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4">
+
+        <div class="col-5">
+            <div class="card card-block">
+                <div class="card text-center" style="opacity: 0.75;">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cometários</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Links</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Imagens</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Título especial</h5>
+                        <p class="card-text">Com suporte a texto embaixo, que funciona como uma introdução a um conteúdo
+                            adicional.</p>
+                        <a href="#" class="btn btn-primary">Comentar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="card card-block">
+                <div class="card text-center" style="opacity: 0.75;">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cometários</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Links</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Imagens</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Título especial</h5>
+                        <p class="card-text">Com suporte a texto embaixo, que funciona como uma introdução a um conteúdo
+                            adicional.</p>
+                        <a href="#" class="btn btn-primary">Comentar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

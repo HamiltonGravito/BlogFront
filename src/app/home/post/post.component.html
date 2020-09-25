@@ -1,0 +1,100 @@
+<!-- Formulário de Post -->
+<h3>Cadastrar Post</h3>
+<form action="POST" id="formPost" #formPost='ngForm' (ngSubmit)="salvarPost(formPost)">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <label for="nome">Titulo</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Digite o titulo do Post"
+                [(ngModel)]="post.titulo">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <label for="descricao" class="col-sm-12 col-form-label">Post</label>
+            <div class="col-sm-12">
+                <textarea class="form-control" id="texto" name="texto" rows="3"
+                    placeholder="Post..." [(ngModel)]="post.texto"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <label for="endereco" class="col-sm-12 col-form-label">Links</label>
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="link" placeholder="Cadastrar Link" aria-describedby="icone" [(ngModel)]="links.link">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <label for="imagem" class="col-sm-12 col-form-label">Imagem</label>
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Escolher imagem" aria-describedby="icone"
+                        readonly>
+                    <div class="input-group-append">
+                        <button data-toggle="modal" data-target="#modalImagem" class="btn btn-outline-secondary" type="button">Escolher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-lg-8">
+            <label for="salvar" class="col-sm-12 col-form-label" style="visibility: hidden; text-align: right;">Salvar
+                Post</label>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-secondary btn-block">Salvar Post</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Fim do Formulário -->
+
+<!-- Modal de Visualização de Imagem -->
+<div class="modal fade" id="modalImagem" tabindex="-1" role="dialog" aria-labelledby="modalImagem" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalImagem">Cadastrar Imagem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="POST" #formImagem='ngForm'>
+
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="card mb-4">
+                                <img [src]="previewUrl" class="img-fluid rounded" alt="" *ngIf="previewUrl" id="imagem">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileimg" name="fileimg"
+                                    aria-describedby="btnSalvarImagem" (change)="preview($event, formImagem)">
+                                <label class="custom-file-label" for="imagem">Escolher Imagem</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="btnSalvarImagem"
+                                    (click)="salvarImagem()">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fim Modal de Visualização de Imagem -->

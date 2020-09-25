@@ -12,31 +12,31 @@ export class CadastroComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
-  public formulario: FormGroup = new FormGroup({
-    'nome' : new FormControl(null),
-    'senha' : new FormControl(null)
-  });
+ usuario: Usuario;
+ usuarioResposta: Usuario;
   constructor( private autenticacao: Autenticacao) { }
 
   ngOnInit(): void {
+    this.usuario = new Usuario();
   }
 
   public exibirLogin(): void {
     this.exibirPainel.emit('login');
   }
 
-  public cadastrarUsuario(): void{
-    let usuario: Usuario = new Usuario(
-      this.formulario.value.nome,
-      this.formulario.value.senha
-    )
-   this.autenticacao.cadastrarUsuario(usuario)
+  cadastrarUsuario(formUsuario: FormGroup): void{
+   this.autenticacao.cadastrarUsuario(this.usuario)
     .subscribe(resposta => {
-      console.log(resposta);
+      this.usuarioResposta = resposta;
+      alert("Cadastrado com Sucesso!!!");
+      console.log(this.usuarioResposta);
+      localStorage.clear();
+      this.exibirLogin();
     }, error => {
+      alert("Não foi possivel Cadastrar seu Usuario!!!");
       console.log(error);
     })
-    this.exibirLogin();
+    
   }
 
 }

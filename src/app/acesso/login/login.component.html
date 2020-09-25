@@ -1,15 +1,17 @@
 <div class="card" style="width: 20rem;">
     <div class="card-body">
       <div class="card-title">
-          <h3>Entre</h3>
+          <h3>Logar</h3>
       </div>
       
-      <!--<form>-->
+      <form #formLogin='ngForm'>
         <div class="form-group">
           <input 
             type="text" 
             class="form-control" 
             placeholder="Nome de Usuário"
+            [(ngModel)]="login.nome"
+            name="nome"
           >
         </div>
         <div class="form-group">
@@ -17,13 +19,15 @@
             type="password"
             class="form-control" 
             placeholder="Senha"
+            [(ngModel)]="login.senha"
+            name="senha"
           >
         </div>
-        <button type="submit" class="btn btn-primary btn-sm btn-block">Entrar</button>
-      <!--</form>-->
+        <button type="button" class="btn btn-primary btn-sm btn-block" (click)="logar()">Entrar</button>
+      </form>
       <hr />
   
-      <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+      <p *ngIf="log == false" class="small text-danger text-center">O nome de usuário ou senha inseridos não pertencem a uma conta. Verifique seu nome de usuário e senha e tente novamente.</p>
   
     </div>
   </div>
@@ -31,7 +35,7 @@
   <div class="card" style="width: 20rem;">
     <div class="card-body">
       <p class="card-text">
-        Não tem uma conta? <a href="#" (click)="exibirCadastro()" class="card-link">Cadastre-se</a>
+        Não tem uma conta? <a (click)="exibirCadastro()" class="card-link">Cadastre-se</a>
       </p> 
     </div>
   </div>
