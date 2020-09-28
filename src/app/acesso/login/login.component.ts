@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
    this.autenticacao.logar(this.usuario)
     .subscribe(resposta => {
       this.usuario = resposta;
-      localStorage.setItem("ID", this.usuario.id.toString())
+      localStorage.setItem("usuario", JSON.stringify(this.usuario));
       this.rota.navigate(['']);
     }, error => {
       console.log(error);

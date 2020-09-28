@@ -43,7 +43,7 @@ export class PostComponent implements OnInit {
   }
 
   salvarPost(formPost: FormGroup): void {
-   this.usuario.id = parseInt(localStorage.getItem("ID"));
+   this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
    this.post.usuarioId = this.usuario;
    this.post.listaLinks = this.listaLinks;
