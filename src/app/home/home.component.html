@@ -1,35 +1,36 @@
-<div class="container-fluid">
+<div class="container">
     <h1 class="mt-5">Posts</h1>
     <p class="subtitle">
         <p *ngIf="usuarioLogado == false">Logue-se para Cadastrar Posts<p>
         <button *ngIf="usuarioLogado"  [routerLink]="['/post']" routerLinkActive="router-link-active" class="btn btn-primary">Cadastrar Post</button></p>
     <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4">
-
-        <div class="col-5" *ngFor="let post of posts">
-            <div class="card card-block">
-                <div class="card text-center" style="opacity: 0.75;">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
+            
+        <div class="row">
+            <div class="col"*ngFor="let post of posts">
+				<div class="card card-block" >
+                    <div class="card text-center cardCentro" >
+                        <div class="card-header">
+                          <ul class="nav nav-pills card-header-pills">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cometários</a>
+                              <a class="nav-link" href="#">Comentários</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Links</a>
+                              <a class="nav-link" href="#">Links</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Imagens</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{post.titulo}}</h5>
-                        <p class="card-text">{{ post.texto }}</p>
-                        <a href="#" class="btn btn-primary">Comentar</a>
-                        <button class="btn btn-danger" (click)="deletarId(post.id)">Deletar</button>
-                    </div>
+                              </li>
+                          </ul>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">{{post.titulo}}</h5>
+                          <p class="card-text">{{post.texto}}</p>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="deletarPost(post.id)">Excluir Post</button>
+                      </div>
                 </div>
-            </div>
+			</div>
         </div>
-
+			
     </div>
 </div>

@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Post } from '../../model/post.model';
 import { PostService } from '../../service/post.service';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Imagem } from 'src/app/model/imagem.model';
 import { Usuario } from 'src/app/model/usuario.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -27,26 +28,31 @@ export class PostComponent implements OnInit {
   progress: { percentage: number } = { percentage: 0 };
   previewUrl: any = null;
   usuario: Usuario;
+  formPost: FormGroup;
   
 
-  constructor(private service: PostService) { }
+  constructor(private service: PostService, private rota: Router) {
+
+   }
 
   ngOnInit(): void {
     this.post = new Post();
     this.controlarLinks = "Cadastrar";
     this.usuario = new Usuario();
+    this.alternarValor();
   }
 
-
   salvarPost(formPost: FormGroup): void {
-   this.usuario = JSON.parse(localStorage.getItem("user"));
+   this.usuario.id = parseInt(localStorage.getItem("ID"));
+
    this.post.usuarioId = this.usuario;
    this.post.listaLinks = this.listaLinks;
-   console.log(this.listaImagensStr);
    this.post.listaImagens = this.listaImagensStr;
+   
    this.service.salvarPost(this.post)
     .subscribe(resposta => {
-      console.log(resposta);  
+      alert("Cadastrado com Sucesso");
+      this.rota.navigate(['']);
     }, error => {
       console.log(error);
     })
@@ -94,7 +100,11 @@ export class PostComponent implements OnInit {
   
   salvarLink(): void {
     let links: string = this.link;
-    this.listaLinks.push(links);
+    if(links.length > 5 && links != ""){
+      this.listaLinks.push(links);
+    }else {
+      alert("Link Inválido")
+    }
     this.link = "";
     this.alternarValor();
   }

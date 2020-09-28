@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.js",
+    "start": "ng serve --proxy-config proxy.conf.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~10.1.0",
     "@angular/platform-browser-dynamic": "~10.1.0",
     "@angular/router": "~10.1.0",
+    "@auth0/angular-jwt": "^5.0.1",
     "@popperjs/core": "^2.4.4",
     "@types/jquery": "^3.5.1",
     "bootstrap": "^4.5.2",

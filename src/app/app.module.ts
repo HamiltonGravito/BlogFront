@@ -33,7 +33,8 @@ import * as $ from "jquery";
     FormsModule,
     MatIconModule
   ],
-  providers: [Autenticacao],
+  providers: [
+    Autenticacao],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

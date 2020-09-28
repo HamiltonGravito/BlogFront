@@ -16,13 +16,12 @@ export class LoginComponent implements OnInit {
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
   usuario: Usuario;
-  login: Login;
   log: boolean;
 
   constructor(private autenticacao: Autenticacao, private rota: Router) { }
 
   ngOnInit(): void {
-    this.login = new Login();
+    this.usuario = new Usuario();
   }
 
   public exibirCadastro(): void {
@@ -30,11 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   public logar(): void {
-   this.autenticacao.logar(this.login)
+   this.autenticacao.logar(this.usuario)
     .subscribe(resposta => {
-      console.log(resposta);
-      let usuario : Usuario = resposta;
-      localStorage.setItem("user", JSON.stringify(usuario));
+      this.usuario = resposta;
+      localStorage.setItem("ID", this.usuario.id.toString())
       this.rota.navigate(['']);
     }, error => {
       console.log(error);
@@ -44,5 +42,4 @@ export class LoginComponent implements OnInit {
       }, 5000)
     })
   }
-
 }

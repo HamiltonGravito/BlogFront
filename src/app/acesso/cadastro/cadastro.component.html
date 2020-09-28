@@ -4,14 +4,14 @@
         <h3>Cadastrar</h3>
       </div>
       
-      <form #formCadastro='ngForm'>
+      <form #formCadastro='ngForm' (ngSubmit)="cadastrar()">
         <div class="form-group">
           <input 
             type="text"
             class="form-control" 
             placeholder="Nome de usuário"
             [(ngModel)]="usuario.nome"
-            name="nome"
+            name="nome" required
           >
         </div>
         <div class="form-group">
@@ -20,10 +20,10 @@
             class="form-control" 
             placeholder="Senha"
             [(ngModel)]="usuario.senha"
-            name="senha"
+            name="senha" required
           >
         </div>
-        <button type="button" class="btn btn-primary btn-sm btn-block" (click)="cadastrarUsuario(formCadastro)">Cadastre-se</button>
+        <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="formCadastro.form.invalid">Cadastre-se</button>
       </form>
       <hr />
   

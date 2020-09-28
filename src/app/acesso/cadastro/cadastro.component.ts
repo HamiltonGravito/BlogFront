@@ -12,8 +12,8 @@ export class CadastroComponent implements OnInit {
 
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
- usuario: Usuario;
- usuarioResposta: Usuario;
+  usuario: Usuario;
+
   constructor( private autenticacao: Autenticacao) { }
 
   ngOnInit(): void {
@@ -24,12 +24,9 @@ export class CadastroComponent implements OnInit {
     this.exibirPainel.emit('login');
   }
 
-  cadastrarUsuario(formUsuario: FormGroup): void{
-   this.autenticacao.cadastrarUsuario(this.usuario)
-    .subscribe(resposta => {
-      this.usuarioResposta = resposta;
+  cadastrar(): void{
+   this.autenticacao.cadastrar(this.usuario).subscribe(resposta => {
       alert("Cadastrado com Sucesso!!!");
-      console.log(this.usuarioResposta);
       localStorage.clear();
       this.exibirLogin();
     }, error => {
@@ -38,5 +35,4 @@ export class CadastroComponent implements OnInit {
     })
     
   }
-
 }

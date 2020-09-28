@@ -13,7 +13,7 @@
             <label for="descricao" class="col-sm-12 col-form-label">Post</label>
             <div class="col-sm-12">
                 <textarea class="form-control" id="texto" name="texto" rows="3"
-                    placeholder="Post..." [(ngModel)]="post.texto"></textarea>
+                    placeholder="Post..." [(ngModel)]="post.texto"  required ></textarea>
             </div>
         </div>
     </div>
@@ -28,6 +28,7 @@
                         <button class="btn btn-outline-secondary" type="button" (click)="salvarLink()">Salvar</button>
                     </div>
                 </div>
+                <div *ngIf="listaLinks.length > 0">Links Adicionados = {{listaLinks.length}}</div>
             </div>
         </div>
 
@@ -41,18 +42,20 @@
                         <button data-toggle="modal" data-target="#modalImagem" class="btn btn-outline-secondary" type="button">Escolher</button>
                     </div>
                 </div>
+                <div *ngIf="listaImagensStr.length > 0">Imagens Adicionadas = {{listaImagensStr.length}}</div>
             </div>
         </div>
     </div>
 
     <div class="form-group row">
-        <div class="col-lg-8">
-            <label for="salvar" class="col-sm-12 col-form-label" style="visibility: hidden; text-align: right;">Salvar
+        <div class="col-lg-6">
+            <label for="salvar" class="col-sm-12 col-form-label" style="visibility: hidden; text-align: center;">Salvar
                 Post</label>
-            <div class="col-sm-12">
-                <button type="submit" class="btn btn-secondary btn-block">Salvar Post</button>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-secondary btn-block" [disabled]="formPost.form.invalid">Salvar Post</button>
             </div>
         </div>
+       
     </div>
 </form>
 <!-- Fim do Formulário -->

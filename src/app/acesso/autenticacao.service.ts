@@ -1,7 +1,7 @@
-import { Usuario } from '../model/usuario.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '../model/login.model';
+import { Usuario } from '../model/usuario.model';
 
 
 @Injectable({
@@ -10,17 +10,21 @@ import { Login } from '../model/login.model';
 
 export class Autenticacao {
 
-    salvarUsuarioUrl: string = "http://localhost:8080/usuario";
-    logarUrl: string = "http://localhost:8080/usuario/login";
+    cadastrarUrl: string = "http://localhost:8080/usuario/cadastrar";
+    logarUrl: string = "http://localhost:8080/usuario/logar";
 
-    private usuarioLogado: Usuario;
+    login: Login;
+    
     constructor(private http: HttpClient){}
 
-    cadastrarUsuario(usuario: Usuario) {
-        return this.http.post<Usuario>(this.salvarUsuarioUrl, usuario);
+    headers = new HttpHeaders();
+    
+    cadastrar(usuario: Usuario){
+        return this.http.post(`${this.cadastrarUrl}`, usuario);
     }
 
-    logar(login: Login) {
-       return this.http.post<Usuario>(this.logarUrl, login);
+    logar(usuario: Usuario) {
+       return this.http.post<Usuario>(`${this.logarUrl}`, usuario);
     }
+    
 }

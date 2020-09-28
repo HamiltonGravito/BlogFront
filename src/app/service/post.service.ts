@@ -3,6 +3,7 @@ import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from '../model/post.model';
 import { Usuario } from '../model/usuario.model';
+import { Link } from '../model/Link.model';
 
 @Injectable({
     providedIn: 'root',
@@ -10,10 +11,12 @@ import { Usuario } from '../model/usuario.model';
 
 export class PostService {
 
-    salvarPostUrl: string = 'http://localhost:8080/post';
+    salvarPostUrl: string = 'http://localhost:8080/post/cadastrar';
+    retornarPost: string = 'http://localhost:8080/post/buscar';
     salvarImagemUrl: string = 'http://localhost:8080/imagem';
     buscarUsuarioId: string = 'http://localhost:8080/usuario';
-    deletarPostUrl: string = 'http://localhost:8080/post';
+    deletarPostUrl: string = 'http://localhost:8080/post/deletar';
+    retornarLinksPost: string = 'http://localhost:8080/post/link';
     
     constructor(private http: HttpClient){ }
 
@@ -32,7 +35,11 @@ export class PostService {
     }
 
     getPosts(): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.salvarPostUrl}`);
+        return this.http.get<Post[]>(`${this.retornarPost}`);
+    }
+
+    getLinks(id: number): Observable<Link[]>{
+        return this.http.get<Link[]>(`${this.retornarLinksPost}/${id}`);
     }
 
     /*public buscarUsuarioPorId(id: number) : Promise<Usuario>{
@@ -43,7 +50,7 @@ export class PostService {
         });
     }*/
 
-    deletePorId(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.deletarPostUrl}/${id}`);
+    deletePorId(idPost: number, idUsuario: number): Observable<any> {
+        return this.http.delete<any>(`${this.deletarPostUrl}/${idPost}/${idUsuario}`);
     }
 }
