@@ -52,7 +52,7 @@ export class PostComponent implements OnInit {
    this.service.salvarPost(this.post)
     .subscribe(resposta => {
       alert("Cadastrado com Sucesso");
-      this.rota.navigate(['']);
+      this.rota.navigate(['post']);
     }, error => {
       console.log(error);
     })

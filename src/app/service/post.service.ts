@@ -20,6 +20,7 @@ export class PostService {
     deletarPostUrl: string = 'http://localhost:8080/post/deletar';
     retornarLinksPost: string = 'http://localhost:8080/post/link';
     retornarComentarios: string = 'http://localhost:8080/comentario';
+    retornarImagens: string = 'http://localhost:8080/imagem';
     
     constructor(private http: HttpClient){ }
 
@@ -51,6 +52,10 @@ export class PostService {
 
     getComentarios(id: number): Observable<Comentario[]>{
         return this.http.get<Comentario[]>(`${this.retornarComentarios}/${id}`);
+    }
+
+    getImagens(id: number): Observable<string[]>{
+        return this.http.get<string[]>(`${this.retornarImagens}/${id}`);
     }
 
     /*public buscarUsuarioPorId(id: number) : Promise<Usuario>{

@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   usuarioLogado: boolean = false;
   posts: Post[] = [];
   links: Link[] = [];
+  imagens: String[] = [];
   comentarios: Comentario[] = [];
   comentarioNovo: Comentario;
   arrayReferences: string[] = [];
@@ -112,6 +113,18 @@ export class HomeComponent implements OnInit {
         console.log(comentarios)
       },
       error: err => {
+        console.log('Error', err);
+      }
+    })
+  }
+
+  buscarImagensPorPost(postId: Post) : void {
+    this.postIdSelecionado = postId;
+    this.postService.getImagens(postId.id).subscribe({
+      next: imagens =>{
+        this.imagens = imagens;
+        console.log(imagens)
+      }, error: err => {
         console.log('Error', err);
       }
     })
