@@ -4,9 +4,9 @@ import { PostService } from '../../service/post.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Imagem } from 'src/app/model/imagem.model';
 import { Usuario } from 'src/app/model/usuario.model';
 import { Router } from '@angular/router';
+import { Imagem } from 'src/app/model/imagem.model';
 
 @Component({
   selector: 'app-post',
@@ -51,8 +51,8 @@ export class PostComponent implements OnInit {
    
    this.service.salvarPost(this.post)
     .subscribe(resposta => {
-      alert("Cadastrado com Sucesso");
-      this.rota.navigate(['post']);
+      alert("Post Salvo com Sucesso")
+      this.rota.navigate(['']);
     }, error => {
       console.log(error);
     })

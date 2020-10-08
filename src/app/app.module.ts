@@ -14,6 +14,7 @@ import { PostComponent } from './home/post/post.component';
 import { MatIconModule } from '@angular/material/icon';
 import * as bootstrap from 'bootstrap';
 import * as $ from "jquery";
+import { AlbumComponent } from './album/album.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import * as $ from "jquery";
     CadastroComponent,
     HeaderComponent,
     HomeComponent,
-    PostComponent
+    PostComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import * as $ from "jquery";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+   
   ],
   providers: [
     Autenticacao],

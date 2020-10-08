@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Comentario } from '../model/comentario.model';
+import { Imagem } from '../model/imagem.model';
 import { Link } from '../model/Link.model';
 import { Post } from '../model/post.model';
 import { Usuario } from '../model/usuario.model';
@@ -15,18 +16,22 @@ import { PostService } from '../service/post.service';
 })
 export class HomeComponent implements OnInit {
 
+ 
+
+  novaImagem: Imagem[] = [];
 
   usuarioLogado: boolean = false;
   posts: Post[] = [];
   links: Link[] = [];
-  imagens: String[] = [];
+  imagens: string[] = [];
   comentarios: Comentario[] = [];
   comentarioNovo: Comentario;
   arrayReferences: string[] = [];
   idLocal: number;
   comentario: Comentario = new Comentario();
   postIdSelecionado: Post = null;
- 
+  listSomentUrl: string[] = [];
+
   constructor(private postService: PostService, private rota: Router) {
     
   }
@@ -35,6 +40,7 @@ export class HomeComponent implements OnInit {
    this.verificarSeExisteAlguemLogado();
    this.retornarPosts();
    this.comentarioNovo = new Comentario();
+   
   }
 
   retornarPosts(): void {
@@ -84,7 +90,9 @@ export class HomeComponent implements OnInit {
      }else {
      this.postService.deleteComentarioPorId(idComentario, this.idLocal).subscribe({
        next: any => {
-        this.rota.navigate(['/', '']);
+        $(function () {
+          $('#modalComentario').modal('hide');
+        });
         },
        error: err => {
          console.log("Error", err);
@@ -94,10 +102,13 @@ export class HomeComponent implements OnInit {
    }
    }
 
+   buscarlinks: boolean = false;
+
   buscarLinkPost(postId: number) : void {
     this.postService.getLinks(postId).subscribe({
       next: links => {
         this.links = links;
+        this.buscarlinks = true;
       },
       error: err => {
         console.log('Error', err);
@@ -122,8 +133,10 @@ export class HomeComponent implements OnInit {
     this.postIdSelecionado = postId;
     this.postService.getImagens(postId.id).subscribe({
       next: imagens =>{
-        this.imagens = imagens;
-        console.log(imagens)
+       this.novaImagem = imagens;
+       this.novaImagem.forEach(element => {
+         console.log(element.imagemUrl);
+       });
       }, error: err => {
         console.log('Error', err);
       }

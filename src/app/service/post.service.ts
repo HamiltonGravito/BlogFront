@@ -5,6 +5,7 @@ import { Post } from '../model/post.model';
 import { Usuario } from '../model/usuario.model';
 import { Link } from '../model/Link.model';
 import { Comentario } from '../model/comentario.model';
+import { Imagem } from '../model/imagem.model';
 
 @Injectable({
     providedIn: 'root',
@@ -54,8 +55,8 @@ export class PostService {
         return this.http.get<Comentario[]>(`${this.retornarComentarios}/${id}`);
     }
 
-    getImagens(id: number): Observable<string[]>{
-        return this.http.get<string[]>(`${this.retornarImagens}/${id}`);
+    getImagens(id: number): Observable<Imagem[]>{
+        return this.http.get<Imagem[]>(`${this.retornarImagens}/${id}`);
     }
 
     /*public buscarUsuarioPorId(id: number) : Promise<Usuario>{
